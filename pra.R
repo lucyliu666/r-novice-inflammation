@@ -79,12 +79,13 @@ print_words(best_practice)
 
 ##
 len <- 0
+h <- 2
 vowels <- c("a", "e", "i", "o", "u")
 for (v in vowels) {
   len <- len + 1
 }
 # Number of vowels
-len
+len  
 
 
 expo <- function(val,N){
