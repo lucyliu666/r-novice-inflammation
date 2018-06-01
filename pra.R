@@ -79,14 +79,12 @@ print_words(best_practice)
 
 ##
 len <- 0
-h <- 2
 vowels <- c("a", "e", "i", "o", "u")
 for (v in vowels) {
   len <- len + 1
 }
 # Number of vowels
 len  
-
 
 expo <- function(val,N){
   res <- 1
@@ -97,3 +95,70 @@ expo <- function(val,N){
 }
 
 expo(2,4)
+
+##
+analyze <- function(filename) {
+  # Plots the average, min, and max inflammation over time.
+  # Input is character string of a csv file.
+  dat <- read.csv(file = filename, header = FALSE)
+  avg_day_inflammation <- apply(dat, 2, mean)
+  plot(avg_day_inflammation)
+  max_day_inflammation <- apply(dat, 2, max)
+  plot(max_day_inflammation)
+  min_day_inflammation <- apply(dat, 2, min)
+  plot(min_day_inflammation)
+}
+
+analyze_all <- function(pattern) {
+  # Runs the function analyze for each file in the current working directory
+  # that contains the given pattern.
+  filenames <- list.files(path = "data", pattern = pattern, full.names = TRUE)
+  for (f in filenames) {
+    analyze(f)
+  }
+}
+
+pdf("inflammation-01.pdf")
+analyze("data/inflammation-01.csv")
+dev.off()
+
+num <- 37
+if (num > 100) {
+  print("greater")
+} else {
+  print("not greater")
+}
+print("done")
+
+##
+sign <- function(num) {
+  if (num > 0) {
+    return(1)
+  } else if (num == 0) {
+    return(0)
+  } else {
+    return(-1)
+  }
+}
+
+sign(-3)
+
+##
+plot_dist <- function(x, threshold) {
+  if (length(x) > threshold) {
+    boxplot(x)
+  } else {
+    stripchart(x)
+  }
+}
+dat <- read.csv("data/inflammation-01.csv", header = FALSE)
+plot_dist(dat[, 10], threshold = 10)     # day (column) 10
+
+if (6){
+  print("OK")
+} else {
+  print("NOK")
+}
+
+}
+}
