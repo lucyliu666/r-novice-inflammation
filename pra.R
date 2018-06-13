@@ -160,5 +160,129 @@ if (6){
   print("NOK")
 }
 
+dat <- read.csv(file="data/sample.csv")
+logicals <- c(TRUE,TRUE, FALSE, FALSE, TRUE, T,T,F,F)
+head(dat[,logicals])
+
+dat <- read.csv("data/car-speeds.csv",stringsAsFactors = TRUE)
+dat$Color <- ifelse(dat$Color == "Red", "Green",dat$Color)
+dat$Color
+
+dat <- read.csv("data/car-speeds.csv",stringsAsFactors = FALSE)
+dat$Color <- ifelse(dat$Color == "Red", "Green",dat$Color)
+dat$Color
+
+dat <- read.csv("data/car-speeds.csv",stringsAsFactors = FALSE,strip.white = TRUE)
+unique(dat$Color)
+
+# write.csv(dat,"data/car-speeds-cleaned.csv",row.names = FALSE)
+
+
+# 
+sex <- factor(c("male","female","female","male"))
+food <- factor(c("low","high","medium","low","high"),levels = c("low","medium","high"),ordered = TRUE)
+levels(food)
+min(food)
+
+dat <-read.csv(file="data/sample.csv",stringsAsFactors = TRUE)
+dat$Gender[dat$Gender=="f"] <- "F"
+dat$Gender[dat$Gender=="m"] <- "M"
+# dat$Gender <- droplevels(dat$Gender)
+plot(x=dat$Gender,y=dat$BloodPressure)
+
+##make a function that takes x and y (integers) and returns a list containing
+#the sum(integer) and the sum coded as a string
+hello <- function(x,y) {
+  res <- list(sum=x+y,sumstring=as.character(x+y))
+  return(res)
 }
+
+hello(3,4)[1]
+hello(3,4)$sumstring
+
+# read the file and compute the mean of each column
+dat <- read.csv(file="data/inflammation-01.csv",header = FALSE)
+apply(dat,margin=2, mean)
+
+dry_principle <- c("don't","repeat","yourself","or","others")
+outside <- function(x){
+  x <- c(x[1],x[length(x)])
+  return(x)
 }
+outside(dry_principle)
+
+
+display <- function(a = 1, b = 2, c = 3) {
+  result <- c(a, b, c)
+  names(result) <- c("a", "b", "c")  # This names each element of the vector
+  return(result)
+}
+
+display(12,34,56)
+
+rescale2 <- function(v,lower=0,upper=1){
+  L <- min(v)
+  H <- max(v)
+  result <- (v - L) / (H - L) * (upper - lower) + lower
+  return(result)
+}
+rescale2(c(1,5,8),lower=2,upper=5)
+
+
+rescale <- function(v) {
+  # Rescales a vector, v, to lie in the range 0 to 1.
+  L <- min(v)
+  H <- max(v)
+  result <- (v - L) / (H - L)
+  return(result)
+}
+rescale(c(1,2,3))
+
+best_practice <- c("Let", "the", "computer", "do", "the", "work")
+print_hi <- function(sentence) { 
+  for (word in sentence) {
+    print(word)
+  }
+}
+
+print_hi(best_practice)
+
+len <- 0
+vowels <- c("a", "e", "i", "o", "u")
+for (v in vowels) {
+  len <- len + 1
+}
+
+len
+
+# or 
+vowels <- c("a", "e", "i", "o", "u")
+length(vowels)
+
+print_N <- function(i){
+  for (j in seq(i)){
+    print(j)
+  } 
+}
+
+print_N(3)
+
+df <- c(4, 8, 15, 16, 23, 42)
+total <- function(v){
+  v_sum <- 0
+  for (i in v){
+    v_sum <- v_sum+i
+  }
+  return(v_sum)
+}
+total(df)
+
+expo <- function(base,power){
+  result <- 1
+  for (i in seq(power)){
+    result <- result*base
+  }
+  return(result)
+}
+
+expo(2,4)
